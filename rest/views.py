@@ -25,3 +25,15 @@ class MoviesView(viewsets.ModelViewSet):
         movies = self.get_object()
         serializer = MoviesSerializer(movies, context={"request": request})
         return Response(serializer.data)
+
+class MoviesViews(APIView):
+    def get_object(self):
+        try:
+            return Movies.objects.all()
+        except Movies.DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None):
+        movies = self.get_object()
+        serializer = MoviesSerializer(movies, context={"request": request})
+        return Response(serializer.data)
