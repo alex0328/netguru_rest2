@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
-from rest_framework import views, status
+from rest_framework import views, status, viewsets
 from rest.serializers import MoviesSerializer
 from rest_framework.response import Response
 from rest.models import Movies
@@ -14,7 +14,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 
 # Create your views here.
-class MoviesView(APIView):
+class MoviesView(viewsets.ModelViewSet):
     def get_object(self):
         try:
             return Movies.objects.all()
